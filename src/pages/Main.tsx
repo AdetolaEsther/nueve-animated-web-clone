@@ -1,77 +1,122 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 const Main = () => {
     const ref = useRef(null);
 
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start 50%", "end 50%"],
-    });
+  const { scrollYProgress: imageScroll } = useScroll({
+      target: ref,
+      offset: ["start 50%", "end 50%"],
+  });
 
-    const width = useTransform(scrollYProgress, [0, 1], ["20%", "120%"]);
-    const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+    const width = useTransform(imageScroll, [0, 1], ["20%", "120%"]);
+    const height = useTransform(imageScroll, [0, 1], ["0%", "100%"]);
     const borderTopLeftRadius = useTransform(
-        scrollYProgress,
+        imageScroll,
         [0, 1],
         ["50%", "0%"]
     );
     const borderTopRightRadius = useTransform(
-        scrollYProgress,
+        imageScroll,
         [0, 1],
         ["50%", "0%"]
     );
-  const [activeTab, setActiveTab] = useState<"classic" | "mini" | "village">(
-      "classic"
-  );
-const images = {
-    classic: [
-        "/Nueve-list-1.png",
-        "/Nueve-list-2.png",
-        "/Nueve-list-3.png",
-        "/Nueve-list-4.png",
-        "/Nueve-list-5.png",
-        "/Nueve-list-6.png",
-    ],
-    mini: [
-        "/Nueve-Home-Mini-1.png",
-        "/Nueve-Home-Mini-2.png",
-        "/Nueve-Home-Mini-3.png",
-        "/Nueve-Home-Mini-4.png",
-        "/Nueve-Home-Mini-5.png",
-        "/Nueve-Home-Mini-6.png",
-    ],
-    village: [
-        "/Nueve-Village-Gallery-1.png",
-        "/Nueve-Village-Gallery-2.png",
-        "/Nueve-Village-Gallery-3.png",
-        "/Nueve-Village-Gallery-4.png",
-        "/Nueve-Village-Gallery-5.png",
-        "/Nueve-Village-Gallery-6.png",
-    ],
-};
+const { scrollYProgress: pageScroll } = useScroll();
+
+const background = useTransform(
+    pageScroll,
+    [0, 0.3, 0.6, 1],
+    ["#e9e4d9", "#e9e4d9", "#000", "#000"]
+);
+
+const textColor = useTransform(
+    pageScroll,
+    [0, 0.3, 0.6, 1],
+    ["#000", "#000", "#fff", "#fff"]
+);
+
+const [logo, setLogo] = useState("/logo-2.png");
+
+useMotionValueEvent(pageScroll, "change", (latest) => {
+    setLogo(latest > 0.3 ? "/logo-white.png" : "/logo-2.png");
+});
+
+    const [activeTab, setActiveTab] = useState<"classic" | "mini" | "village">(
+        "classic"
+    );
+    const images = {
+        classic: [
+            "/Nueve-list-1.png",
+            "/Nueve-list-2.png",
+            "/Nueve-list-3.png",
+            "/Nueve-list-4.png",
+            "/Nueve-list-5.png",
+            "/Nueve-list-6.png",
+        ],
+        mini: [
+            "/Nueve-Home-Mini-1.png",
+            "/Nueve-Home-Mini-2.png",
+            "/Nueve-Home-Mini-3.png",
+            "/Nueve-Home-Mini-4.png",
+            "/Nueve-Home-Mini-5.png",
+            "/Nueve-Home-Mini-6.png",
+        ],
+        village: [
+            "/Nueve-Village-Gallery-1.png",
+            "/Nueve-Village-Gallery-2.png",
+            "/Nueve-Village-Gallery-3.png",
+            "/Nueve-Village-Gallery-4.png",
+            "/Nueve-Village-Gallery-5.png",
+            "/Nueve-Village-Gallery-6.png",
+        ],
+    };
+    const amenities = [
+        { title: "Internet access", icon: "material-symbols-light:wifi-sharp" },
+        {
+            title: "Air conditioning",
+            icon: "streamline:interface-weather-snow-flake-winter-freeze-snow-freezing-ice-cold-weather-snowflake",
+        },
+        { title: "Heating", icon: "ph:thermometer-thin" },
+        { title: "Kitchen", icon: "mdi:silverware" },
+        { title: "Flat TV", icon: "f7:tv" },
+        { title: "Balcony", icon: "iconoir:balcony" },
+        {
+            title: "Beach access",
+            icon: "streamline:travel-places-beach-island-waves-outdoor-recreation-tree-beach-palm-wave-water",
+        },
+        { title: "Washing machine", icon: "ph:washing-machine-light" },
+    ];
+
     return (
         <div className="overflow-x-hidden">
-            <div className="fixed top-0 left-0 w-full z-50 bg-[#e9e4d9] flex justify-between items-center px-8 py-4">
+            <motion.div
+                style={{ backgroundColor: background, color: textColor }}
+                className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-4"
+            >
                 <Image
-                    src="/logo-2.png"
+                    src={
+                        pageScroll.get() > 0.3
+                            ? "/logo-white.png"
+                            : "/logo-2.png"
+                    }
                     alt="nueve-logo"
                     width={220}
                     height={120}
                 />
                 <div className="flex items-center gap-4">
-                    <h3 className="m-0 text-black">EN</h3>
-                    <h3 className="m-0 text-black">EL</h3>
+                    <h3 className="m-0">EN</h3>
+                    <h3 className="m-0">EL</h3>
                     <Icon
                         icon="mdi-light:menu"
-                        className="text-gray-600 cursor-pointer"
+                        className="cursor-pointer"
                         width="40"
                         height="40"
                     />
                 </div>
-            </div>
+            </motion.div>
 
             <div className="bg-[#e9e4d9] h-screen flex justify-center items-center">
                 <h1 className="text-black text-8xl font-bold leading-tight text-center">
@@ -185,6 +230,104 @@ const images = {
                             />
                         </div>
                     ))}
+                </div>
+            </div>
+            <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-center px-8 md:px-14 py-16 mt-0 ">
+                <h2 className="text-9xl md:text-9xl font-bold text-black mb-12 font-melodrama">
+                    amenities.
+                </h2>
+                <h2 className="text-lg md:text-xl text-black mb-12">
+                    Each accommodation offers a distinct experience.
+                </h2>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-8xl">
+                    {amenities.map((item, index) => (
+                        <div
+                            key={index}
+                            className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 last:border-r-0"
+                        >
+                            <Icon
+                                icon={item.icon}
+                                className="text-4xl mb-2 text-black"
+                            />
+                            <p className="text-black text-lg">{item.title}</p>
+                        </div>
+                    ))}
+                </div>
+                <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
+                    Book Now
+                </button>
+            </div>
+            <div className="bg-black min-h-screen flex flex-col px-8 md:px-14 py-16">
+                <div className="flex gap-16 items-start mt-auto">
+                    <div>
+                        <h2 className="text-lg md:text-xl text-gray-400 mb-4">
+                            mail
+                        </h2>
+                        <ul className="text-white">
+                            <li>adetolaesther5@gmail.com</li>
+                        </ul>
+                        <h2 className="text-lg md:text-xl text-gray-400 mt-4">
+                            phone
+                        </h2>
+                        <ul className="text-white">
+                            <li>+2348130252751</li>
+                        </ul>
+                        <h2 className="text-lg md:text-xl text-gray-400 mt-4">
+                            social
+                        </h2>
+                        <ul className="text-white">
+                            <li>instagram</li>
+                            <li>facebook</li>
+                        </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-lg md:text-xl text-gray-400">
+                            residence
+                        </h2>
+                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
+                            classic.
+                        </button>
+                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
+                            mini.
+                        </button>
+                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
+                            village.
+                        </button>
+                    </div>
+
+                    <div>
+                        <h2 className="text-lg md:text-xl text-gray-400 mb-4">
+                            {" "}
+                        </h2>
+                        <ul className="text-white">
+                            <li>experiences</li>
+                            <li>book now</li>
+                            <li>contact</li>
+                            <li>privacy</li>
+                            <li>cookies</li>
+                        </ul>
+                    </div>
+
+                    <p className="text-white text-2xl ml-auto">( 9 )</p>
+                </div>
+
+                <h1 className="text-white text-7xl md:text-9xl font-bold mt-auto text-center my-12">
+                    nueve <span className="font-extralight">residence.</span>
+                </h1>
+
+                <div className="mt-auto flex justify-between items-center">
+                    <p className="text-white">© 2025 All rights reserved.</p>
+                    <button className="px-8 py-4 bg-black text-white rounded-4xl border-2 border-white">
+                        <Icon
+                            icon="fluent-emoji-high-contrast:light-blue-heart"
+                            className="inline-block mr-2"
+                            width="24"
+                            height="24"
+                        />
+                        MADE BY ADETOLA
+                    </button>
                 </div>
             </div>
         </div>
