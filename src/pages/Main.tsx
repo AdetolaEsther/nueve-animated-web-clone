@@ -147,7 +147,12 @@ useMotionValueEvent(pageScroll, "change", (latest) => {
                 </motion.div>
             </div>
             <div className="bg-[#e9e4d9] min-h-screen px-8 md:px-14 py-16">
-                <h2 className="text-9xl font-bold text-black mb-12">deco.</h2>
+                <h2
+                    className="text-9xl font-bold text-black mb-12"
+                    style={{ fontSize: "15rem" }}
+                >
+                    deco.
+                </h2>
                 <div className="px-24 grid grid-cols-1 md:grid-cols-2 gap-18">
                     <div className="p-8 rounded-2xl flex flex-col gap-6">
                         <p className="text-gray-700 text-2xl">
@@ -180,13 +185,13 @@ useMotionValueEvent(pageScroll, "change", (latest) => {
                         </p>
 
                         <div className="flex gap-4">
-                            <button className="px-4 py-2 bg-[url('/Nueve-list-4.png')] text-white rounded-3xl">
+                            <button className="px-4 py-2 bg-[url('/Nueve-list-4.png')]  text-[#e9e4d9] text-2xl rounded-3xl">
                                 classic{" "}
                             </button>
-                            <button className="px-4 py-2 bg-[url('/Nueve-Home-Mini-6.png')] text-white rounded-3xl">
+                            <button className="px-4 py-2 bg-[url('/Nueve-Home-Mini-6.png')] text-[#e9e4d9] text-2xl rounded-3xl">
                                 mini{" "}
                             </button>
-                            <button className="px-4 py-2 bg-[url('/Nueve-Home-Mini-2.png')] text-white rounded-3xl">
+                            <button className="px-4 py-2 bg-[url('/Nueve-Home-Mini-2.png')]  text-[#e9e4d9] text-2xl rounded-3xl">
                                 village{" "}
                             </button>
                         </div>
@@ -194,7 +199,10 @@ useMotionValueEvent(pageScroll, "change", (latest) => {
                 </div>
             </div>
             <div className="bg-black min-h-screen px-8 md:px-14 py-16">
-                <h2 className="text-9xl font-bold text-white mb-12 text-right">
+                <h2
+                    className="text-9xl font-bold text-white mb-12 text-right"
+                    style={{ fontSize: "15rem" }}
+                >
                     gallery.
                 </h2>
 
@@ -233,7 +241,10 @@ useMotionValueEvent(pageScroll, "change", (latest) => {
                 </div>
             </div>
             <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-center px-8 md:px-14 py-16 mt-0 ">
-                <h2 className="text-9xl md:text-9xl font-bold text-black mb-12 font-melodrama">
+                <h2
+                    className="text-9xl md:text-9xl font-bold text-black mb-12 font-melodrama"
+                    style={{ fontSize: "15rem" }}
+                >
                     amenities.
                 </h2>
                 <h2 className="text-lg md:text-xl text-black mb-12">
@@ -313,9 +324,21 @@ useMotionValueEvent(pageScroll, "change", (latest) => {
                     <p className="text-white text-2xl ml-auto">( 9 )</p>
                 </div>
 
-                <h1 className="text-white text-7xl md:text-9xl font-bold mt-auto text-center my-12">
-                    nueve <span className="font-extralight">residence.</span>
-                </h1>
+                <div className="overflow-hidden whitespace-nowrap">
+                    <motion.h1
+                        className="text-white text-9xl md:text-9xl font-extra-bold mt-auto text-center my-12 inline-block"
+                        style={{ fontSize: "18rem" }}
+                        animate={{ x: ["100%", "-100%"] }}
+                        transition={{
+                            repeat: Infinity,
+                            duration: 15,
+                            ease: "linear",
+                        }}
+                    >
+                        nueve{" "}
+                        <span className="font-extralight">residence.</span>
+                    </motion.h1>
+                </div>
 
                 <div className="mt-auto flex justify-between items-center">
                     <p className="text-white">© 2025 All rights reserved.</p>
