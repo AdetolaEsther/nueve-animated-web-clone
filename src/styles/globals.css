@@ -1,28 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif,'melodrama';
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: var(--font-geist-mono);
 }
 
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+h1 {
+    font-family: "Manrope";
+}
+
+#brxe-qorxtc {
+    margin: 0;
+    font-size: 43.2px;
+    border-color: #dddedf;
+    text-rendering: optimizelegibility;
+    box-sizing: border-box;
+    max-width: 100%;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-top: -5px;
+    mix-blend-mode: difference
+}
+
+@media (max-width:767px) {
+    #brxe-qorxtc {
+        font-size: 40px;
+        display: none
+    }
+}
+
+@media (max-width:430px) {
+    #brxe-qorxtc {
+        font-size: 28px;
+        letter-spacing: -1px
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
 }
-

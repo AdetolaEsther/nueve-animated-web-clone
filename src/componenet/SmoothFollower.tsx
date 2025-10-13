@@ -96,8 +96,8 @@ export default function SmoothFollower() {
             <div
                 className="absolute rounded-full dark:bg-black bg-black "
                 style={{
-                    width: "8px",
-                    height: "8px",
+                    width: "20px",
+                    height: "20px",
                     transform: "translate(-50%, -50%)",
                     left: `${renderPos.dot.x}px`,
                     top: `${renderPos.dot.y}px`,
