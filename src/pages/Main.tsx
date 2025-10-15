@@ -58,6 +58,7 @@ const Main = () => {
     );
 
     const [logo, setLogo] = useState("/logo-2.png");
+  const [menuOpen, setMenuOpen] = useState(false);
 
 const buttons = [
     {
@@ -109,6 +110,8 @@ const buttons = [
             "/Nueve-Village-Gallery-6.png",
         ],
     };
+    const allImages = [...images.classic, ...images.mini, ...images.village];
+
     const amenities = [
         { title: "Internet access", icon: "material-symbols-light:wifi-sharp" },
         {
@@ -130,12 +133,17 @@ const buttons = [
         <div>
             <div className="relative z-[1] overflow-x-hidden overflow-y-hidden">
                 <motion.div
-                    style={{ backgroundColor: background, color: textColor }}
-                    className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-4"
+                    style={{
+                        backgroundColor: menuOpen ? "#000" : background,
+                        color: menuOpen ? "#fff" : textColor,
+                    }}
+                    className="fixed top-0 left-0 w-full z-[101] flex justify-between items-center px-8 py-4"
                 >
                     <Image
                         src={
-                            pageScroll.get() > 0.3
+                            menuOpen
+                                ? "/logo-white.png"
+                                : pageScroll.get() > 0.3
                                 ? "/logo-white.png"
                                 : "/logo-2.png"
                         }
@@ -143,17 +151,130 @@ const buttons = [
                         width={220}
                         height={120}
                     />
+
                     <div className="flex items-center gap-4">
-                        <h3 className="m-0">EN</h3>
-                        <h3 className="m-0">EL</h3>
+                        <h3
+                            className="m-0"
+                            style={{ color: menuOpen ? "#fff" : "#000" }}
+                        >
+                            EN
+                        </h3>
+                        <h3
+                            className="m-0"
+                            style={{ color: menuOpen ? "#fff" : "#000" }}
+                        >
+                            EL
+                        </h3>
                         <Icon
-                            icon="mdi-light:menu"
+                            icon={
+                                menuOpen ? "mdi-light:close" : "mdi-light:menu"
+                            }
                             className="cursor-pointer"
+                            style={{
+                                color: menuOpen ? "#fff" : "#000",
+                                zIndex: 101,
+                            }}
                             width="40"
                             height="40"
+                            onClick={() => setMenuOpen(!menuOpen)}
                         />
                     </div>
                 </motion.div>
+
+                {menuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-black text-white flex"
+                    >
+                        <div className="w-1/4 p-8 flex flex-col justify-start h-full pt-38">
+                            <div
+                                className="flex flex-col text-8xl"
+                                style={{
+                                    fontFamily: melodramaLight.style.fontFamily,
+                                }}
+                            >
+                                {[
+                                    "Home",
+                                    "Residence",
+                                    "Experience",
+                                    "Contacts",
+                                ].map((item, idx) => (
+                                    <motion.span
+                                        key={idx}
+                                        className="cursor-pointer"
+                                        whileHover={{
+                                            y: [-9, 8, -8],
+                                            transition: {
+                                                repeat: Infinity,
+                                                duration: 9,
+                                            },
+                                        }}
+                                    >
+                                        {item}
+                                    </motion.span>
+                                ))}
+                            </div>
+                            <div className="text-sm mt-auto">
+                                © 2025 All rights reserved
+                            </div>
+                        </div>
+
+                        <div className="w-1/2 flex justify-center items-center overflow-hidden relative">
+                            <motion.div
+                                className="flex flex-col gap-8"
+                                animate={{ y: ["0%", "-50%"] }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 60,
+                                    ease: "linear",
+                                }}
+                            >
+                                {[...allImages, ...allImages].map(
+                                    (img, index) => (
+                                        <div
+                                            key={index}
+                                            className="rounded-3xl overflow-hidden w-64 h-64 flex-shrink-0"
+                                        >
+                                            <Image
+                                                src={img}
+                                                alt={`image-${index}`}
+                                                width={270}
+                                                height={270}
+                                            />
+                                        </div>
+                                    )
+                                )}
+                            </motion.div>
+                        </div>
+
+                        <div className="w-1/4 p-10 flex flex-col justify-center gap-6 text-left">
+                            <div>
+                                <h4>Mail</h4>
+                                <p>info@example.com</p>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1234567890</p>
+                            </div>
+                            <div>
+                                <h4>Social Media</h4>
+                                <p>@nueve</p>
+                            </div>
+                            <div>
+                                <p className="text-white text-7xl ml-auto mt-8">
+                                    ( 9 )
+                                </p>
+                            </div>
+                            <div className="mt-9">
+                                <p>book now</p>
+                                <p>Privacy policy</p>
+                                <p>cookies</p>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
 
                 <div>
                     <div className="bg-[#e9e4d9] h-screen flex justify-center items-center z-20">
@@ -237,10 +358,9 @@ const buttons = [
                                             backgroundPosition: "center",
                                         }}
                                         whileHover={{
-                                            y: -8, 
+                                            y: -8,
                                             scale: 2,
-                                            rotate: -8, 
-                                           
+                                            rotate: -8,
                                         }}
                                         whileTap={{ scale: 0.95 }}
                                         drag
