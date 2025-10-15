@@ -9,6 +9,8 @@ import {
     useTransform,
 } from "framer-motion";
 import localFont from "next/font/local";
+import Footer from "@/componenet/Footer";
+import { useRouter } from "next/navigation";
 
 
 const melodrama = localFont({
@@ -24,6 +26,8 @@ const melodramaLight = localFont({
 });
 const Main = () => {
     const ref = useRef(null);
+  const router = useRouter();
+
     const { scrollYProgress: imageScroll } = useScroll({
         target: ref,
         offset: ["start 90%", "50% start"],
@@ -55,6 +59,23 @@ const Main = () => {
 
     const [logo, setLogo] = useState("/logo-2.png");
 
+const buttons = [
+    {
+        label: "classic",
+        href: "/classic",
+        bg: "url('/Nueve-list-4.png')",
+    },
+    {
+        label: "mini",
+        href: "/mini",
+        bg: "url('/Nueve-Home-Mini-6.png')",
+    },
+    {
+        label: "village",
+        href: "/village",
+        bg: "url('/Nueve-Home-Mini-2.png')",
+    },
+];
     useMotionValueEvent(pageScroll, "change", (latest) => {
         setLogo(latest > 0.3 ? "/logo-white.png" : "/logo-2.png");
     });
@@ -133,7 +154,7 @@ const Main = () => {
                         />
                     </div>
                 </motion.div>
-                
+
                 <div>
                     <div className="bg-[#e9e4d9] h-screen flex justify-center items-center z-20">
                         <h1 className="text-black text-8xl font-bold leading-tight text-center">
@@ -193,7 +214,7 @@ const Main = () => {
                         </div>
 
                         <div className="p-8 rounded-2xl flex flex-col gap-6">
-                            <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
+                            <p className="text-gray-600 font-light text-2xl leading-10">
                                 With modern decor, earthy tones, and all the
                                 amenities you need, our properties are ideal for
                                 families, couples, or groups of friends. Relax,
@@ -202,36 +223,38 @@ const Main = () => {
                             </p>
 
                             <div className="flex gap-6">
-                                <button
-                                    className="px-6 py-4 bg-[url('/Nueve-list-4.png')] font-normal text-[#e9e4d9] text-2xl rounded-full"
-                                    style={{
-                                        fontSize: "2rem",
-                                        fontFamily:
-                                            melodramaLight.style.fontFamily,
-                                    }}
-                                >
-                                    classic{" "}
-                                </button>
-                                <button
-                                    className="px-4 py-2 bg-[url('/Nueve-Home-Mini-6.png')] text-[#e9e4d9] text-2xl rounded-full"
-                                    style={{
-                                        fontSize: "2rem",
-                                        fontFamily:
-                                            melodramaLight.style.fontFamily,
-                                    }}
-                                >
-                                    mini{" "}
-                                </button>
-                                <button
-                                    className="px-4 py-2 bg-[url('/Nueve-Home-Mini-2.png')]  text-[#e9e4d9] text-2xl rounded-full"
-                                    style={{
-                                        fontSize: "2rem",
-                                        fontFamily:
-                                            melodramaLight.style.fontFamily,
-                                    }}
-                                >
-                                    village{" "}
-                                </button>
+                                {buttons.map((btn, index) => (
+                                    <motion.button
+                                        key={index}
+                                        onClick={() => router.push(btn.href)}
+                                        className="px-6 py-4 font-normal text-[#e9e4d9] text-2xl rounded-full"
+                                        style={{
+                                            backgroundImage: btn.bg,
+                                            fontSize: "2rem",
+                                            fontFamily:
+                                                melodramaLight.style.fontFamily,
+                                            backgroundSize: "cover",
+                                            backgroundPosition: "center",
+                                        }}
+                                        whileHover={{
+                                            y: -8, 
+                                            scale: 2,
+                                            rotate: -8, 
+                                           
+                                        }}
+                                        whileTap={{ scale: 0.95 }}
+                                        drag
+                                        dragConstraints={{
+                                            top: -10,
+                                            bottom: 10,
+                                            left: -10,
+                                            right: 10,
+                                        }}
+                                        dragElastic={0.3}
+                                    >
+                                        {btn.label}
+                                    </motion.button>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -299,7 +322,7 @@ const Main = () => {
                         {amenities.map((item, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 last:border-r-0"
+                                className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 "
                             >
                                 <Icon
                                     icon={item.icon}
@@ -316,117 +339,47 @@ const Main = () => {
                         Book Now
                     </button>
                 </div>
-            </div>
-
-            <motion.div
-                style={{
-                    clipPath: useTransform(
-                        pageScroll,
-                        [0.8, 1],
-                        ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
-                    ),
-                }}
-                className=" bottom-0 left-0 w-full h-screen bg-black flex flex-col px-8 md:px-14 py-16 -z-50"
-            >
-                <div className="flex gap-16 items-start mt-auto">
-                    <div>
-                        <h2 className="text-lg md:text-xl text-gray-400 mb-4">
-                            mail
-                        </h2>
-                        <ul className="text-white">
-                            <li>adetolaesther5@gmail.com</li>
-                        </ul>
-                        <h2 className="text-lg md:text-xl text-gray-400 mt-4">
-                            phone
-                        </h2>
-                        <ul className="text-white">
-                            <li>+2348130252751</li>
-                        </ul>
-                        <h2 className="text-lg md:text-xl text-gray-400 mt-4">
-                            social
-                        </h2>
-                        <ul className="text-white">
-                            <li>instagram</li>
-                            <li>facebook</li>
-                        </ul>
-                    </div>
-
-                    <div className="flex flex-col gap-4">
-                        <h2 className="text-lg md:text-xl text-gray-400">
-                            residence
-                        </h2>
-                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
-                            classic.
-                        </button>
-                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
-                            mini.
-                        </button>
-                        <button className="px-8 py-4 bg-black text-white rounded-3xl border-2 border-white">
-                            village.
-                        </button>
-                    </div>
-
-                    <div>
-                        <h2 className="text-lg md:text-xl text-gray-400 mb-4">
-                            {" "}
-                        </h2>
-                        <ul className="text-white">
-                            <li>experiences</li>
-                            <li>book now</li>
-                            <li>contact</li>
-                            <li>privacy</li>
-                            <li>cookies</li>
-                        </ul>
-                    </div>
-
-                    <p className="text-white text-2xl ml-auto">( 9 )</p>
-                </div>
-
-                <div className="overflow-hidden whitespace-nowrap">
-                    <motion.h1
-                        className="text-white text-9xl md:text-9xl font-extra-bold mt-auto text-center my-12 inline-block"
-                        style={{ fontSize: "18rem" }}
-                        animate={{ x: ["100%", "-100%"] }}
-                        transition={{
-                            repeat: Infinity,
-                            duration: 60,
-                            ease: "linear",
+                <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-center px-8 md:px-14 py-16 relative z-20">
+                    <h2
+                        className="text-9xl font-bold text-black mb-12 font-melodrama"
+                        style={{
+                            fontSize: "15rem",
+                            fontFamily: melodrama.style.fontFamily,
                         }}
                     >
-                        nueve{" "}
-                        <span
-                            className="font-extralight"
-                            style={{
-                                fontFamily: melodramaLight.style.fontFamily,
-                            }}
-                        >
-                            residence.
-                        </span>{"  "}
-                        nueve
-                        <span
-                            className="font-extralight"
-                            style={{
-                                fontFamily: melodramaLight.style.fontFamily,
-                            }}
-                        >
-                            residence.
-                        </span>
-                    </motion.h1>
-                </div>
+                        amenities.
+                    </h2>
+                    <h2 className="text-gray-600 font-light text-2xl">
+                        Each accommodation offers a distinct experience.
+                    </h2>
 
-                <div className="mt-auto flex justify-between items-center">
-                    <p className="text-white">© 2025 All rights reserved.</p>
-                    <button className="px-8 py-4 bg-black text-white rounded-4xl border-2 border-white font-melodrama">
-                        <Icon
-                            icon="fluent-emoji-high-contrast:light-blue-heart"
-                            className="inline-block mr-2"
-                            width="24"
-                            height="24"
-                        />
-                        MADE BY ADETOLA
+                    <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-8xl">
+                        {amenities.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 "
+                            >
+                                <Icon
+                                    icon={item.icon}
+                                    className="text-4xl mb-2 text-black"
+                                />
+                                <p className="text-black text-lg">
+                                    {item.title}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
+                        Book Now
+                    </button>
+                    <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
+                        Book Now
                     </button>
                 </div>
-            </motion.div>
+            </div>
+
+            <Footer scrollYProgress={pageScroll} />
         </div>
     );
 };

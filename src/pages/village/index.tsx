@@ -19,41 +19,34 @@ const melodrama = localFont({
 const Index = () => {
     const { scrollYProgress: pageScroll } = useScroll();
 
-     const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-  const amenitiesByRoom = {
-      Bathroom: [
-          { name: "Hair dryer", icon: "mdi:hair-dryer-outline" },
-          { name: "Cleaning products", icon: "mdi:spray-bottle" },
-          { name: "Shampoo", icon: "mdi:bottle-tonic" },
-          { name: "Body soap", icon: "mdi:shower" },
-          { name: "Hot water", icon: "mdi:water-boiler" },
-      ],
-      "Bedroom & laundry": [
-          { name: "Washing machine", icon: "mdi:washing-machine" },
-          { name: "Essentials", icon: "mdi:tshirt-crew-outline" },
-          { name: "Extra pillows & blankets", icon: "mdi:blanket" },
-          { name: "Hangers", icon: "mdi:hanger" },
-          { name: "Iron", icon: "mdi:iron" },
-      ],
-      Kitchen: [
-          { name: "Refrigerator", icon: "mdi:fridge-outline" },
-          { name: "Microwave", icon: "mdi:microwave" },
-          { name: "Cooking basics", icon: "mdi:pot-steam-outline" },
-          { name: "Dishes & silverware", icon: "mdi:silverware-fork-knife" },
-          { name: "Coffee maker", icon: "mdi:coffee-maker-outline" },
-      ],
-  };
- const amenities = [
-        { title: "Internet access", icon: "material-symbols-light:wifi-sharp" },
-        { title: "Heating", icon: "ph:thermometer-thin" },
-        { title: "Kitchen", icon: "mdi:silverware" },
-        { title: "Flat TV", icon: "f7:tv" },
-        { title: "Balcony", icon: "iconoir:balcony" },
-    ];
+    const amenitiesByRoom = {
+        Bathroom: [
+            { name: "Hair dryer", icon: "mdi:hair-dryer-outline" },
+            { name: "Cleaning products", icon: "mdi:spray-bottle" },
+            { name: "Shampoo", icon: "mdi:bottle-tonic" },
+            { name: "Body soap", icon: "mdi:shower" },
+            { name: "Hot water", icon: "mdi:water-boiler" },
+        ],
+        "Bedroom & laundry": [
+            { name: "Washing machine", icon: "mdi:washing-machine" },
+            { name: "Essentials", icon: "mdi:tshirt-crew-outline" },
+            { name: "Extra pillows & blankets", icon: "mdi:blanket" },
+            { name: "Hangers", icon: "mdi:hanger" },
+            { name: "Iron", icon: "mdi:iron" },
+        ],
+        Kitchen: [
+            { name: "Refrigerator", icon: "mdi:fridge-outline" },
+            { name: "Microwave", icon: "mdi:microwave" },
+            { name: "Cooking basics", icon: "mdi:pot-steam-outline" },
+            { name: "Dishes & silverware", icon: "mdi:silverware-fork-knife" },
+            { name: "Coffee maker", icon: "mdi:coffee-maker-outline" },
+        ],
+    };
+    
     return (
         <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-start relative pt-40">
-            {/* Navbar */}
             <motion.div
                 style={{ backgroundColor: "#e9e4d9", color: "#000" }}
                 className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-4"
@@ -89,20 +82,21 @@ const Index = () => {
 
                 <div className="text-center">
                     <h3
-                        className="text-9xl font-bold text-black mb-12"
+                        className="text-9xl font-bold text-black mb-10"
                         style={{ fontFamily: melodramaLight.style.fontFamily }}
                     >
-                        classic. {"{comfort}"}
+                        the. {"{VILLAGE}"}
                     </h3>
                     <p className="text-gray-600 mt-4 font-light text-xl leading-6">
-                        A spacious two-bedroom apartment, ideal for those
+                        A bright single-family house in Vartholomio, just a few{" "}
                         <br />
-                        seeking comfort and elegance in the city center.
+                        minutes from Thinon beach, offers the ideal setting for
+                        a
+                        <br /> quiet summer vacation.
                     </p>
                 </div>
 
                 <div className="w-[1px] h-64 mt-2.5 bg-gray-400"></div>
-
                 <div className="w-full max-w-7xl border border-gray-400 rounded-lg overflow-hidden">
                     <div className="grid grid-cols-5 divide-x divide-gray-400">
                         {[
@@ -131,7 +125,7 @@ const Index = () => {
                     <div className="shadow-md rounded-2xl overflow-hidden flex flex-col md:flex-row">
                         <div className="w-full md:w-1/2">
                             <Image
-                                src="/Nueve-list-1.png"
+                                src="/Nueve-Village-Gallery-1.png"
                                 alt="Classic main"
                                 width={800}
                                 height={600}
@@ -141,10 +135,10 @@ const Index = () => {
 
                         <div className="w-full md:w-1/2 grid grid-cols-2 grid-rows-2 gap-4 p-1">
                             {[
-                                "/Nueve-list-2.png",
-                                "/Nueve-list-3.png",
-                                "/Nueve-list-4.png",
-                                "/Nueve-list-5.png",
+                                "/Nueve-Village-Gallery-2.png",
+                                "/Nueve-Village-Gallery-3.png",
+                                "/Nueve-Village-Gallery-4.png",
+                                "/Nueve-Village-Gallery-5.png",
                             ].map((src, index) => (
                                 <div key={index} className="relative">
                                     <Image
@@ -166,40 +160,30 @@ const Index = () => {
                                 fontFamily: melodrama.style.fontFamily,
                             }}
                         >
-                            comfort{" "}
+                            retreat{" "}
                         </h2>
                         <div className=" grid grid-cols-1 md:grid-cols-2 gap-18">
                             <div className="flex flex-col gap-6">
                                 <p className="text-gray-600 font-light text-2xl leading-10">
-                                    A unique apartment in the center of Patras,
-                                    which highlights the beauty of earthy colors
-                                    and offers a warm, modern atmosphere.
+                                    A stylish and functional one-bedroom
+                                    apartment, ideal for couples or solo
+                                    travelers who want to be in the center of
+                                    the action.
                                 </p>
                                 <p className="text-gray-600 font-light text-2xl leading-10">
-                                    With access to a balcony offering stunning
-                                    views of the city center, the apartment
-                                    creates a unique living experience, while
-                                    offering the comfort and practicality that
-                                    guests are looking for.
+                                    The earthy tones and contemporary design
+                                    offer a sense of warmth, while the stylish
+                                    space is equipped with all the amenities for
+                                    a relaxing stay.
                                 </p>
                             </div>
 
                             <div className=" rounded-2xl flex flex-col gap-6">
                                 <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
-                                    The apartment is a real space of renewal in
-                                    the heart of the city, with a harmonious
-                                    composition of earthy tones that create a
-                                    sense of calm and harmony.
+                                    With access to a beautiful terrace offering
+                                    city views, Mini is the perfect choice for a
+                                    warm and modern getaway in Patras.
                                 </p>
-
-                                <div className="flex gap-6">
-                                    <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
-                                        The spacious and bright areas of the
-                                        apartment welcome you with comfortable
-                                        furniture and decoration details that
-                                        highlight the warmth of the house.
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
