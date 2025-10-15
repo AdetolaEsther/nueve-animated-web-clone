@@ -275,7 +275,7 @@ const Index = () => {
                                             className="text-2xl text-black"
                                         />
                                         <p className="text-lg text-black">
-                                            TV 58" with Netflix
+                                            TV 58 with Netflix
                                         </p>
                                     </div>
                                     <div className="flex items-center gap-3">
