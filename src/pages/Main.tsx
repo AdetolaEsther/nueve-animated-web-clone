@@ -11,7 +11,8 @@ import {
 import localFont from "next/font/local";
 import Footer from "@/componenet/Footer";
 import { useRouter } from "next/navigation";
-
+import { Modal, IconButton, Box } from "@mui/material";
+import { ArrowBackIosNew, ArrowForwardIos, Close } from "@mui/icons-material";
 
 const melodrama = localFont({
     src: "../../public/font/Melodrama-Bold.ttf",
@@ -128,16 +129,38 @@ const buttons = [
         },
         { title: "Washing machine", icon: "ph:washing-machine-light" },
     ];
+     const [open, setOpen] = useState(false);
+     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+ const handleOpen = (index: number) => {
+     setSelectedIndex(index);
+     setOpen(true);
+ };
 
+ const handleClose = () => {
+     setOpen(false);
+     setSelectedIndex(null);
+ };
+
+ const handleNext = () => {
+     if (selectedIndex !== null)
+         setSelectedIndex((selectedIndex + 1) % images[activeTab].length);
+ };
+
+ const handlePrev = () => {
+     if (selectedIndex !== null)
+         setSelectedIndex(
+             (selectedIndex - 1 + images[activeTab].length) %
+                 images[activeTab].length
+         );
+ };
     return (
         <div>
             <div className="relative z-[1] overflow-x-hidden overflow-y-hidden">
                 <motion.div
                     style={{
-                        backgroundColor: menuOpen ? "#000" : background,
                         color: menuOpen ? "#fff" : textColor,
                     }}
-                    className="fixed top-0 left-0 w-full z-[101] flex justify-between items-center px-8 py-4"
+                    className="fixed top-0 left-0 w-full z-[101] flex justify-between items-center px-8 py-4 bg-transparent backdrop-blur-sm transition-colors duration-500"
                 >
                     <Image
                         src={
@@ -155,13 +178,13 @@ const buttons = [
                     <div className="flex items-center gap-4">
                         <h3
                             className="m-0"
-                            style={{ color: menuOpen ? "#fff" : "#000" }}
+                            style={{ color: menuOpen ? "#fff" : textColor.get() }}
                         >
                             EN
                         </h3>
                         <h3
                             className="m-0"
-                            style={{ color: menuOpen ? "#fff" : "#000" }}
+                            style={{ color: menuOpen ? "#fff" : textColor.get() }}
                         >
                             EL
                         </h3>
@@ -171,7 +194,7 @@ const buttons = [
                             }
                             className="cursor-pointer"
                             style={{
-                                color: menuOpen ? "#fff" : "#000",
+                                color: menuOpen ? "#fff" : textColor.get(),
                                 zIndex: 101,
                             }}
                             width="40"
@@ -308,24 +331,24 @@ const buttons = [
                     </section>
                 </div>
 
-                <div className="bg-[#e9e4d9] min-h-screen px-8 md:px-14 py-16 z-30">
+                <div className="bg-[#e9e4d9] min-h-screen px-6 md:px-14 py-12 md:py-16 z-30">
                     <h2
-                        className="text-9xl font-bold text-black mb-12"
+                        className="text-6xl sm:text-8xl md:text-9xl font-bold text-black mb-8 md:mb-12 leading-none text-center md:text-left"
                         style={{
-                            fontSize: "15rem",
                             fontFamily: melodrama.style.fontFamily,
                         }}
                     >
                         decthe.
                     </h2>
-                    <div className="px-24 grid grid-cols-1 md:grid-cols-2 gap-18">
-                        <div className="p-6 flex flex-col gap-6">
-                            <p className="text-gray-600 font-light text-2xl leading-10">
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-18 px-0 md:px-24">
+                        <div className="p-4 md:p-6 flex flex-col gap-4 md:gap-6">
+                            <p className="text-gray-600 font-light text-lg sm:text-xl md:text-2xl leading-relaxed md:leading-10">
                                 Our collection of select accommodations,
                                 designed with an emphasis on comfort, style, and
                                 functionality, offers you a unique stay.
                             </p>
-                            <p className="text-gray-600 font-light text-2xl leading-10">
+                            <p className="text-gray-600 font-light text-lg sm:text-xl md:text-2xl leading-relaxed md:leading-10">
                                 Whether you prefer the spaciousness of the
                                 Classic or the compact luxury of the Mini in
                                 Patras, or the serenity of the Village Family
@@ -334,8 +357,8 @@ const buttons = [
                             </p>
                         </div>
 
-                        <div className="p-8 rounded-2xl flex flex-col gap-6">
-                            <p className="text-gray-600 font-light text-2xl leading-10">
+                        <div className="p-4 md:p-8 rounded-2xl flex flex-col gap-4 md:gap-6">
+                            <p className="text-gray-600 font-light text-lg sm:text-xl md:text-2xl leading-relaxed md:leading-10">
                                 With modern decor, earthy tones, and all the
                                 amenities you need, our properties are ideal for
                                 families, couples, or groups of friends. Relax,
@@ -343,24 +366,23 @@ const buttons = [
                                 own pace.
                             </p>
 
-                            <div className="flex gap-6">
+                            <div className="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-start">
                                 {buttons.map((btn, index) => (
                                     <motion.button
                                         key={index}
                                         onClick={() => router.push(btn.href)}
-                                        className="px-6 py-4 font-normal text-[#e9e4d9] text-2xl rounded-full"
+                                        className="px-6 py-3 md:py-4 font-normal text-[#e9e4d9] text-xl md:text-2xl rounded-full"
                                         style={{
                                             backgroundImage: btn.bg,
-                                            fontSize: "2rem",
                                             fontFamily:
                                                 melodramaLight.style.fontFamily,
                                             backgroundSize: "cover",
                                             backgroundPosition: "center",
                                         }}
                                         whileHover={{
-                                            y: -8,
-                                            scale: 2,
-                                            rotate: -8,
+                                            y: -6,
+                                            scale: 1.1,
+                                            rotate: -5,
                                         }}
                                         whileTap={{ scale: 0.95 }}
                                         drag
@@ -379,18 +401,19 @@ const buttons = [
                         </div>
                     </div>
                 </div>
+
                 <div className="bg-black min-h-screen px-8 md:px-14 py-16 z-30">
                     <h2
-                        className="text-9xl font-bold text-white mb-12 text-right"
+                        className="font-bold text-white mb-8 md:mb-12 leading-none text-center md:text-right
+             text-7xl sm:text-7xl md:text-9xl"
                         style={{
-                            fontSize: "15rem",
                             fontFamily: melodrama.style.fontFamily,
                         }}
                     >
                         gallery.
                     </h2>
 
-                    <div className="flex gap-12 text-3xl text-white mb-12">
+                    <div className="flex gap-12 text-3xl  md:text-5xl text-white mb-12">
                         {["classic", "mini", "village"].map((tab) => (
                             <button
                                 key={tab}
@@ -402,6 +425,10 @@ const buttons = [
                                         ? "border-white"
                                         : "border-transparent"
                                 }`}
+                                style={{
+                                    fontFamily: melodrama.style.fontFamily,
+                                    fontStyle: "italic",
+                                }}
                             >
                                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
                             </button>
@@ -416,6 +443,7 @@ const buttons = [
                                 <img
                                     src={src}
                                     alt={`${activeTab} ${i + 1}`}
+                                    onClick={() => handleOpen(i)}
                                     className="w-full h-full object-cover rounded-xl
 
 "
@@ -423,79 +451,100 @@ const buttons = [
                             </div>
                         ))}
                     </div>
+                    <Modal open={open} onClose={handleClose}>
+                        <Box
+                            sx={{
+                                position: "fixed",
+                                inset: 0,
+                                bgcolor: "rgba(0,0,0,0.7)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                zIndex: 1000,
+                            }}
+                        >
+                            <IconButton
+                                onClick={handleClose}
+                                sx={{
+                                    position: "absolute",
+                                    top: 20,
+                                    right: 20,
+                                    color: "white",
+                                }}
+                            >
+                                <Close fontSize="large" />
+                            </IconButton>
+
+                            <IconButton
+                                onClick={handlePrev}
+                                sx={{
+                                    position: "absolute",
+                                    left: 20,
+                                    color: "white",
+                                }}
+                            >
+                                <ArrowBackIosNew fontSize="large" />
+                            </IconButton>
+
+                            {selectedIndex !== null && (
+                                <Image
+                                    src={images[activeTab][selectedIndex]}
+                                    alt={`modal-${selectedIndex}`}
+                                    width={1000}
+                                    height={800}
+                                    className="max-w-[90vw] max-h-[100vh] object-contain rounded-xl"
+                                />
+                            )}
+
+                            <IconButton
+                                onClick={handleNext}
+                                sx={{
+                                    position: "absolute",
+                                    right: 20,
+                                    color: "white",
+                                }}
+                            >
+                                <ArrowForwardIos fontSize="large" />
+                            </IconButton>
+                        </Box>
+                    </Modal>
                 </div>
-                <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-center px-8 md:px-14 py-16 relative z-20">
+                <div className="bg-[#e9e4d9] min-h-[100svh] md:min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-14 py-12 md:py-16 relative z-20 w-full">
                     <h2
-                        className="text-9xl font-bold text-black mb-12 font-melodrama"
-                        style={{
-                            fontSize: "15rem",
-                            fontFamily: melodrama.style.fontFamily,
-                        }}
+                        className="font-bold leading-none text-center text-5xl sm:text-7xl md:text-[200px] lg:text-[240px] text-black"
+                        style={{ fontFamily: melodrama.style.fontFamily }}
                     >
                         amenities.
                     </h2>
-                    <h2 className="text-gray-600 font-light text-2xl">
+
+                    <h2 className="text-gray-600 font-light text-base sm:text-lg md:text-2xl text-center max-w-2xl mx-auto mb-8 md:mb-12">
                         Each accommodation offers a distinct experience.
                     </h2>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-8xl">
+                    <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-4 border border-gray-400 border-opacity-50">
                         {amenities.map((item, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 "
+                                className="flex flex-col items-center justify-center aspect-square border-gray-400 border-opacity-50 border-r border-b last:border-r-0"
                             >
                                 <Icon
                                     icon={item.icon}
-                                    className="text-4xl mb-2 text-black"
+                                    className="text-3xl md:text-4xl mb-3 text-black"
                                 />
-                                <p className="text-black text-lg">
+                                <p className="text-black text-sm sm:text-base font-light tracking-wide">
                                     {item.title}
                                 </p>
                             </div>
                         ))}
                     </div>
 
-                    <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
+                    <button className="px-6 sm:px-8 py-3 sm:py-4 bg-black text-white rounded-full mt-10 md:mt-12 text-sm sm:text-base md:text-lg">
                         Book Now
                     </button>
                 </div>
+
                 <div className="bg-[#e9e4d9] min-h-screen flex flex-col items-center justify-center px-8 md:px-14 py-16 relative z-20">
-                    <h2
-                        className="text-9xl font-bold text-black mb-12 font-melodrama"
-                        style={{
-                            fontSize: "15rem",
-                            fontFamily: melodrama.style.fontFamily,
-                        }}
-                    >
-                        amenities.
-                    </h2>
-                    <h2 className="text-gray-600 font-light text-2xl">
-                        Each accommodation offers a distinct experience.
-                    </h2>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 w-full max-w-8xl">
-                        {amenities.map((item, index) => (
-                            <div
-                                key={index}
-                                className="flex flex-col items-center justify-center p-15 border-b border-r border-gray-700 "
-                            >
-                                <Icon
-                                    icon={item.icon}
-                                    className="text-4xl mb-2 text-black"
-                                />
-                                <p className="text-black text-lg">
-                                    {item.title}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
-                        Book Now
-                    </button>
-                    <button className="px-8 py-4 bg-black text-white rounded-4xl mt-12 ">
-                        Book Now
-                    </button>
+                    {" "}
                 </div>
             </div>
 

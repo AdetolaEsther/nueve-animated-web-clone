@@ -69,7 +69,7 @@ const Index = () => {
                 </div>
             </motion.div>
 
-            <div className="w-full max-w-7xl px-6 flex flex-col items-center">
+            <div className="w-full max-w-8xl px-4 flex flex-col items-center bg-[#e9e4d9]">
                 <div className="w-[1px] mt-8 h-24 bg-gray-400"></div>
 
                 <div className="relative flex items-center justify-center">
