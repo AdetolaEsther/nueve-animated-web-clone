@@ -178,13 +178,17 @@ const buttons = [
                     <div className="flex items-center gap-4">
                         <h3
                             className="m-0"
-                            style={{ color: menuOpen ? "#fff" : textColor.get() }}
+                            style={{
+                                color: menuOpen ? "#fff" : textColor.get(),
+                            }}
                         >
                             EN
                         </h3>
                         <h3
                             className="m-0"
-                            style={{ color: menuOpen ? "#fff" : textColor.get() }}
+                            style={{
+                                color: menuOpen ? "#fff" : textColor.get(),
+                            }}
                         >
                             EL
                         </h3>
@@ -209,11 +213,12 @@ const buttons = [
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black text-white flex"
+                        className="fixed inset-0 z-[100] bg-black text-white flex flex-col md:flex-row"
                     >
-                        <div className="w-1/4 p-8 flex flex-col justify-start h-full pt-38">
+                        {/* Left Section */}
+                        <div className="w-full md:w-1/4 p-6 md:p-8 flex flex-col justify-start h-full pt-20 md:pt-38">
                             <div
-                                className="flex flex-col text-8xl"
+                                className="flex flex-col text-5xl sm:text-6xl md:text-8xl space-y-4 md:space-y-8"
                                 style={{
                                     fontFamily: melodramaLight.style.fontFamily,
                                 }}
@@ -239,14 +244,15 @@ const buttons = [
                                     </motion.span>
                                 ))}
                             </div>
-                            <div className="text-sm mt-auto">
+                            <div className="text-xs sm:text-sm mt-auto pt-6 md:pt-0">
                                 © 2025 All rights reserved
                             </div>
                         </div>
 
-                        <div className="w-1/2 flex justify-center items-center overflow-hidden relative">
+                        {/* Center Section (Images) */}
+                        <div className="w-full md:w-1/2 flex justify-center items-center overflow-hidden relative my-6 md:my-0">
                             <motion.div
-                                className="flex flex-col gap-8"
+                                className="flex flex-col gap-6 sm:gap-8"
                                 animate={{ y: ["0%", "-50%"] }}
                                 transition={{
                                     repeat: Infinity,
@@ -258,13 +264,14 @@ const buttons = [
                                     (img, index) => (
                                         <div
                                             key={index}
-                                            className="rounded-3xl overflow-hidden w-64 h-64 flex-shrink-0"
+                                            className="rounded-3xl overflow-hidden w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 flex-shrink-0 mx-auto"
                                         >
                                             <Image
                                                 src={img}
                                                 alt={`image-${index}`}
                                                 width={270}
                                                 height={270}
+                                                className="object-cover w-full h-full"
                                             />
                                         </div>
                                     )
@@ -272,25 +279,28 @@ const buttons = [
                             </motion.div>
                         </div>
 
-                        <div className="w-1/4 p-10 flex flex-col justify-center gap-6 text-left">
+                        {/* Right Section */}
+                        <div className="w-full md:w-1/4 p-6 md:p-10 flex flex-col justify-center gap-4 text-center md:text-left">
                             <div>
-                                <h4>Mail</h4>
-                                <p>info@example.com</p>
+                                <h4 className="text-lg font-semibold">Mail</h4>
+                                <p className="text-sm">info@example.com</p>
                             </div>
                             <div>
-                                <h4>Phone</h4>
-                                <p>+1234567890</p>
+                                <h4 className="text-lg font-semibold">Phone</h4>
+                                <p className="text-sm">+1234567890</p>
                             </div>
                             <div>
-                                <h4>Social Media</h4>
-                                <p>@nueve</p>
+                                <h4 className="text-lg font-semibold">
+                                    Social Media
+                                </h4>
+                                <p className="text-sm">@nueve</p>
                             </div>
-                            <div>
-                                <p className="text-white text-7xl ml-auto mt-8">
-                                    ( 9 )
-                                </p>
-                            </div>
-                            <div className="mt-9">
+
+                            <p className="text-white text-5xl sm:text-6xl md:text-7xl mt-8 md:ml-auto">
+                                ( 9 )
+                            </p>
+
+                            <div className="mt-8 space-y-2">
                                 <p>book now</p>
                                 <p>Privacy policy</p>
                                 <p>cookies</p>
