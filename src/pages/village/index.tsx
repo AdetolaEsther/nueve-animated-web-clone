@@ -179,7 +179,7 @@ const Index = () => {
                             </div>
 
                             <div className=" rounded-2xl flex flex-col gap-6">
-                                <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
+                                <p className="text-gray-600 font-light text-2xl  leading-10">
                                     With access to a beautiful terrace offering
                                     city views, Mini is the perfect choice for a
                                     warm and modern getaway in Patras.
@@ -421,7 +421,7 @@ const Index = () => {
                             </div>
 
                             <div className=" rounded-2xl flex flex-col gap-6">
-                                <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
+                                <p className="text-gray-600 font-light text-2xl  leading-10">
                                     The apartment is a real space of renewal in
                                     the heart of the city, with a harmonious
                                     composition of earthy tones that create a
@@ -429,7 +429,7 @@ const Index = () => {
                                 </p>
 
                                 <div className="flex gap-6">
-                                    <p className="text-gray-600 font-light text-2xl leading-10 leading-10">
+                                    <p className="text-gray-600 font-light text-2xl leading-10">
                                         The spacious and bright areas of the
                                         apartment welcome you with comfortable
                                         furniture and decoration details that
